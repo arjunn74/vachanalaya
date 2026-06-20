@@ -66,6 +66,39 @@ function Home() {
         ))}
       </section>
 
+      <section className="mt-24">
+        <div className="mb-6 flex items-baseline justify-between">
+          <h2 className="font-serif text-2xl tracking-tight">Also in the library</h2>
+          <Link to="/shiva-purana" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+            Open the Shiva Purana →
+          </Link>
+        </div>
+        <div className="rounded-2xl border border-border p-6 md:p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            Shiva Purana · {shivaIndex.length} chapters
+          </p>
+          <h3 className="mt-2 font-serif text-3xl tracking-tight">
+            Mahatmya, Vidyesvara &amp; Rudra Samhitas
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            The first volume of the Shiva Purana in English — seven sections covering
+            the glory of the text, the worship of the lingam, the cosmogony, and the
+            stories of Sati, Parvati, Kumara and the wars of Siva.
+          </p>
+          <ul className="mt-6 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-3">
+            {SHIVA_SECTION_ORDER.map((s) => {
+              const count = shivaIndex.filter((c) => c.section === s).length;
+              return (
+                <li key={s} className="flex items-baseline justify-between gap-3">
+                  <span>{SHIVA_SECTION_META[s].full}</span>
+                  <span className="text-xs tabular-nums text-muted-foreground">{count}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
       <section className="mt-20 grid gap-10 md:grid-cols-3">
         {[
           { h: "Read", p: "A single-column reader with adjustable type, line spacing, and a sepia mode for long sessions." },
