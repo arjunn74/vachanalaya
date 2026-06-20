@@ -1,0 +1,100 @@
+[
+  {
+    "id": "narada-parivrajaka",
+    "number": 96,
+    "title": "Narada Parivrajaka Upanishad",
+    "veda": "Rig",
+    "verseCount": 39
+  },
+  {
+    "id": "nrisimha-tapaniya",
+    "number": 97,
+    "title": "Nrisimha Tapaniya Upanishad",
+    "veda": "Rig",
+    "verseCount": 6
+  },
+  {
+    "id": "para-brahma",
+    "number": 98,
+    "title": "Para-Brahma Upanishad",
+    "veda": "Rig",
+    "verseCount": 3
+  },
+  {
+    "id": "paramahamsa-parivrajaka",
+    "number": 99,
+    "title": "Paramahamsa-Parivrajaka Upanishad",
+    "veda": "Rig",
+    "verseCount": 4
+  },
+  {
+    "id": "pasupata-brahmana",
+    "number": 100,
+    "title": "Pasupata Brahmana Upanishad",
+    "veda": "Rig",
+    "verseCount": 2
+  },
+  {
+    "id": "prasna",
+    "number": 101,
+    "title": "Prasna Upanishad",
+    "veda": "Rig",
+    "verseCount": 11
+  },
+  {
+    "id": "rama-rahasya",
+    "number": 102,
+    "title": "Rama Rahasya Upanishad",
+    "veda": "Rig",
+    "verseCount": 17
+  },
+  {
+    "id": "rama-tapaniya",
+    "number": 103,
+    "title": "Rama Tapaniya Upanishad",
+    "veda": "Rig",
+    "verseCount": 4
+  },
+  {
+    "id": "sandilya",
+    "number": 104,
+    "title": "Sandilya Upanishad",
+    "veda": "Rig",
+    "verseCount": 10
+  },
+  {
+    "id": "sarabha",
+    "number": 105,
+    "title": "Sarabha Upanishad",
+    "veda": "Rig",
+    "verseCount": 2
+  },
+  {
+    "id": "sita",
+    "number": 106,
+    "title": "Sita Upanishad",
+    "veda": "Rig",
+    "verseCount": 6
+  },
+  {
+    "id": "surya",
+    "number": 107,
+    "title": "Surya Upanishad",
+    "veda": "Rig",
+    "verseCount": 2
+  },
+  {
+    "id": "tripadvibhuti-mahanarayana",
+    "number": 108,
+    "title": "Tripadvibhuti Mahanarayana Upanishad",
+    "veda": "Rig",
+    "verseCount": 3
+  },
+  {
+    "id": "tripura-tapini",
+    "number": 109,
+    "title": "Tripura Tapini Upanishad",
+    "veda": "Rig",
+    "verseCount": 26
+  }
+]
