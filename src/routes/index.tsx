@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { upanishadIndex, VEDA_ORDER } from "@/data/upanishads";
+import { shivaIndex, SHIVA_SECTION_ORDER, SHIVA_SECTION_META } from "@/data/shiva-purana";
 
 export const Route = createFileRoute("/")({
   head: () => ({
