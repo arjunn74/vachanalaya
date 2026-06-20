@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpanishadsRouteImport } from './routes/upanishads'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
 
 const UpanishadsRoute = UpanishadsRouteImport.update({
   id: '/upanishads',
@@ -22,31 +23,38 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UpanishadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/upanishads': typeof UpanishadsRoute
+  '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/upanishads': typeof UpanishadsRoute
+  '/upanishads': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/upanishads': typeof UpanishadsRoute
+  '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/upanishads'
+  fullPaths: '/' | '/upanishads' | '/upanishads/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/upanishads'
-  id: '__root__' | '/' | '/upanishads'
+  id: '__root__' | '/' | '/upanishads' | '/upanishads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  UpanishadsRoute: typeof UpanishadsRoute
+  UpanishadsRoute: typeof UpanishadsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +73,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/upanishads/': {
+      id: '/upanishads/'
+      path: '/'
+      fullPath: '/upanishads/'
+      preLoaderRoute: typeof UpanishadsIndexRouteImport
+      parentRoute: typeof UpanishadsRoute
+    }
   }
 }
 
+interface UpanishadsRouteChildren {
+  UpanishadsIndexRoute: typeof UpanishadsIndexRoute
+}
+
+const UpanishadsRouteChildren: UpanishadsRouteChildren = {
+  UpanishadsIndexRoute: UpanishadsIndexRoute,
+}
+
+const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
+  UpanishadsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  UpanishadsRoute: UpanishadsRoute,
+  UpanishadsRoute: UpanishadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
