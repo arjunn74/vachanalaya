@@ -144,11 +144,11 @@ def main():
                 else:
                     verses.append({"text": part})
 
-        # Drop a leading verse that is just the Upanishad title
+        # Strip leading "N. Title Upanishad" repeated as preamble from first verse
         if verses and not verses[0].get("id"):
-            t = verses[0]["text"].lower()
-            tw = title.lower().split()[0]
-            if tw in t[:80] and len(verses[0]["text"]) < 140:
+            pat = re.compile(rf"^\s*{num}\s*\.?\s*{re.escape(title)}\s+", re.I)
+            verses[0]["text"] = pat.sub("", verses[0]["text"]).strip()
+            if not verses[0]["text"]:
                 verses = verses[1:]
 
         slug = slugify(title)
