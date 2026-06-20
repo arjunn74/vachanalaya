@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpanishadsRouteImport } from './routes/upanishads'
+import { Route as GitaRouteImport } from './routes/gita'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
+import { Route as GitaIndexRouteImport } from './routes/gita.index'
 import { Route as UpanishadsSlugRouteImport } from './routes/upanishads.$slug'
+import { Route as GitaSlugRouteImport } from './routes/gita.$slug'
 
 const UpanishadsRoute = UpanishadsRouteImport.update({
   id: '/upanishads',
   path: '/upanishads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GitaRoute = GitaRouteImport.update({
+  id: '/gita',
+  path: '/gita',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -29,40 +37,74 @@ const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => UpanishadsRoute,
 } as any)
+const GitaIndexRoute = GitaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GitaRoute,
+} as any)
 const UpanishadsSlugRoute = UpanishadsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => UpanishadsRoute,
 } as any)
+const GitaSlugRoute = GitaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GitaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/gita': typeof GitaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/gita/$slug': typeof GitaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/gita/': typeof GitaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/gita/$slug': typeof GitaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/gita': typeof GitaIndexRoute
   '/upanishads': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/gita': typeof GitaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/gita/$slug': typeof GitaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/gita/': typeof GitaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
+  fullPaths:
+    | '/'
+    | '/gita'
+    | '/upanishads'
+    | '/gita/$slug'
+    | '/upanishads/$slug'
+    | '/gita/'
+    | '/upanishads/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/upanishads/$slug' | '/upanishads'
-  id: '__root__' | '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
+  to: '/' | '/gita/$slug' | '/upanishads/$slug' | '/gita' | '/upanishads'
+  id:
+    | '__root__'
+    | '/'
+    | '/gita'
+    | '/upanishads'
+    | '/gita/$slug'
+    | '/upanishads/$slug'
+    | '/gita/'
+    | '/upanishads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GitaRoute: typeof GitaRouteWithChildren
   UpanishadsRoute: typeof UpanishadsRouteWithChildren
 }
 
@@ -73,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/upanishads'
       fullPath: '/upanishads'
       preLoaderRoute: typeof UpanishadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gita': {
+      id: '/gita'
+      path: '/gita'
+      fullPath: '/gita'
+      preLoaderRoute: typeof GitaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -89,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpanishadsIndexRouteImport
       parentRoute: typeof UpanishadsRoute
     }
+    '/gita/': {
+      id: '/gita/'
+      path: '/'
+      fullPath: '/gita/'
+      preLoaderRoute: typeof GitaIndexRouteImport
+      parentRoute: typeof GitaRoute
+    }
     '/upanishads/$slug': {
       id: '/upanishads/$slug'
       path: '/$slug'
@@ -96,8 +152,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpanishadsSlugRouteImport
       parentRoute: typeof UpanishadsRoute
     }
+    '/gita/$slug': {
+      id: '/gita/$slug'
+      path: '/$slug'
+      fullPath: '/gita/$slug'
+      preLoaderRoute: typeof GitaSlugRouteImport
+      parentRoute: typeof GitaRoute
+    }
   }
 }
+
+interface GitaRouteChildren {
+  GitaSlugRoute: typeof GitaSlugRoute
+  GitaIndexRoute: typeof GitaIndexRoute
+}
+
+const GitaRouteChildren: GitaRouteChildren = {
+  GitaSlugRoute: GitaSlugRoute,
+  GitaIndexRoute: GitaIndexRoute,
+}
+
+const GitaRouteWithChildren = GitaRoute._addFileChildren(GitaRouteChildren)
 
 interface UpanishadsRouteChildren {
   UpanishadsSlugRoute: typeof UpanishadsSlugRoute
@@ -115,6 +190,7 @@ const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GitaRoute: GitaRouteWithChildren,
   UpanishadsRoute: UpanishadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
