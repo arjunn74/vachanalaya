@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpanishadsRouteImport } from './routes/upanishads'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
+import { Route as UpanishadsSlugRouteImport } from './routes/upanishads.$slug'
 
 const UpanishadsRoute = UpanishadsRouteImport.update({
   id: '/upanishads',
@@ -28,28 +29,36 @@ const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => UpanishadsRoute,
 } as any)
+const UpanishadsSlugRoute = UpanishadsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => UpanishadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
   '/upanishads': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/upanishads' | '/upanishads/'
+  fullPaths: '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/upanishads'
-  id: '__root__' | '/' | '/upanishads' | '/upanishads/'
+  to: '/' | '/upanishads/$slug' | '/upanishads'
+  id: '__root__' | '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,14 +89,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpanishadsIndexRouteImport
       parentRoute: typeof UpanishadsRoute
     }
+    '/upanishads/$slug': {
+      id: '/upanishads/$slug'
+      path: '/$slug'
+      fullPath: '/upanishads/$slug'
+      preLoaderRoute: typeof UpanishadsSlugRouteImport
+      parentRoute: typeof UpanishadsRoute
+    }
   }
 }
 
 interface UpanishadsRouteChildren {
+  UpanishadsSlugRoute: typeof UpanishadsSlugRoute
   UpanishadsIndexRoute: typeof UpanishadsIndexRoute
 }
 
 const UpanishadsRouteChildren: UpanishadsRouteChildren = {
+  UpanishadsSlugRoute: UpanishadsSlugRoute,
   UpanishadsIndexRoute: UpanishadsIndexRoute,
 }
 

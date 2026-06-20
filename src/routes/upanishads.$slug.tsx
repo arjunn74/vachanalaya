@@ -161,7 +161,7 @@ function Reader() {
         </header>
 
         <div className="space-y-6">
-          {upanishad.verses.map((v, i) => (
+          {upanishad.verses.map((v: { id?: string; text: string }, i: number) => (
             <div key={i} className="group relative">
               {v.id && (
                 <span
