@@ -1,86 +1,100 @@
-## Vachanalaya — MVP plan
+# Add Shiva Purana
 
-A modern, minimal reading app for the 108 Upanishads (English). No accounts in this milestone — bookmarks and progress are stored in `localStorage` and can be promoted to Lovable Cloud later when more texts (Vedas, Bhagavatam, Gita) are added.
+Bring the Shiva Purana (Siva Purana, English translation, 1,085 pages) into Vachanalaya alongside the 108 Upanishads, reusing the existing reader and design system.
 
-### What we'll build
+## Structure of the source
 
-1. **Offline PDF → structured data pipeline** (run once during development)
-   - Parse `108-Upanishads-English.pdf` (1,437 pages, clean TOC by Veda group: Rig, Shukla Yajur, Krishna Yajur, Sama, Atharva).
-   - Extract the Table of Contents to get all 108 Upanishad titles + start pages.
-   - Split body text by page ranges into one JSON record per Upanishad with: `id` (slug), `number` (1–108), `title`, `veda` (group), `pages` (start/end), `verses[]` (paragraph blocks with their original section markers like `II-i-4`).
-   - Output: `src/data/upanishads.json` (text) + `src/data/upanishads-index.json` (lightweight list for browse).
-   - The original PDF is **not** shipped — text only, keeping the bundle small and the reader fast.
+The PDF is organized as:
 
-2. **App shell & routes** (TanStack Start)
-   - `/` — landing: brand intro, search/filter input, count of texts, link into the library.
-   - `/upanishads` — browse all 108, grouped by Veda with collapsible sections, filter-as-you-type, shows number + title + veda chip.
-   - `/upanishads/$slug` — reader for a single Upanishad.
-   - Shared minimal top bar: wordmark "Vachanalaya" + nav + theme toggle.
-   - Per-route SEO (`head()`) with unique title/description.
+```
+Shiva Purana
+├── The Glory of Sivapurana            (7 chapters)
+├── Vidyesvara Samhita                 (25 chapters)
+├── Rudra Samhita
+│   ├── Section I — Creation
+│   ├── Section II — Sati
+│   ├── Section III — Parvati
+│   ├── Section IV — Kumara
+│   └── Section V — Yuddha (Battles)
+├── Satarudra Samhita
+├── Kotirudra Samhita
+├── Uma Samhita
+├── Kailasa Samhita
+└── Vayaviya Samhita (Purvabhaga + Uttarabhaga)
+```
 
-3. **Reader experience** (`/upanishads/$slug`)
-   - Centered single column, generous line-height, max ~68ch.
-   - Sticky compact header: Upanishad title, Veda group, prev/next navigation between Upanishads.
-   - Reader controls (popover): font family (serif / sans), font size (S/M/L/XL), line spacing, light / sepia / dark theme.
-   - Verse blocks preserve their section ids (e.g. `II-i-4`) as anchorable, copy-friendly markers in the margin.
-   - Reading progress bar at top based on scroll position; last-read position per Upanishad saved to `localStorage` and restored on revisit.
-   - Keyboard: `←` / `→` for prev/next Upanishad, `j` / `k` to scroll by verse.
+Reader unit = one **chapter**. Browse grouping = **Samhita** (with the Rudra/Vayaviya sub-sections shown as sub-headings inside the Rudra/Vayaviya groups).
 
-4. **Design system — modern & minimal**
-   - Palette (light): background `#FAFAF7` ivory, surface `#FFFFFF`, text `#1A1A1A`, muted `#6B6B68`, single accent `#8B1E1E` (deep saffron-red, used sparingly for active states and the wordmark dot).
-   - Palette (dark): background `#0F0F0E`, surface `#1A1A18`, text `#F3F1EC`, accent `#D97757`.
-   - Sepia reader theme: background `#F5EFE2`, text `#3A2E1F`.
-   - Typography: headings in **Fraunces** (variable serif), body in **Inter**, reader-mode serif option **Source Serif 4**. Loaded via `@fontsource` packages (no CDN tags).
-   - Tokens defined as semantic CSS variables in `src/styles.css` per existing pattern (no hard-coded color utilities in components).
-   - Components from existing shadcn set: `button`, `input`, `popover`, `toggle-group`, `tabs`, `separator`, `scroll-area`, `command` (for browse filter).
+## What gets built
 
-5. **Future-proofing** (structure only, not implemented this milestone)
-   - `src/data/texts/` namespace with one file per scripture so adding Gita/Vedas/Bhagavatam is just dropping in another JSON and listing it in a registry.
-   - Reader is fed by a generic `Text` shape (`{ id, title, tradition, sections[] }`) so it works for any future text without rewrites.
+### 1. Parsing script (`scripts/parse_shiva_purana.py`)
 
-### Technical details
+One-off Python script using `pypdf`, mirroring `parse_upanishads.py`:
 
-**PDF parsing** — one-off Python script `scripts/parse_upanishads.py` using `pypdf`:
-- Read pages 2–6 (the TOC) → regex `^(\d+)\.\s*(.+?)\.+\s*(\d+)$` to capture `[number, title, startPage]`. Track current Veda heading (`RIG-VEDA`, `SHUKLA-YAJUR-VEDA`, etc.) as it appears.
-- Compute `endPage[i] = startPage[i+1] - 1`; last Upanishad ends at `len(pages) - 1`.
-- For each Upanishad: concatenate page text, strip the running header (Veda name) and page numbers, split on the section-id regex `^([IVX]+(?:-[ivx]+)?(?:-\d+)?[\.:])` to produce `verses[]`. Fall back to paragraph splitting when no section ids are present.
-- Slug = kebab-case of title (e.g. `aitareya`, `isha`). Write `src/data/upanishads.json` and the trimmed `src/data/upanishads-index.json`.
-- Script lives in `scripts/` and is **not** part of the runtime — only re-run if source changes.
+- Read the TOC (pages 2–5) to capture Samhita headings, optional Section headings ("SECTION I CREATION", etc.), and chapter lines `^(\d+)\.\s*(.+?)\.+\s*(\d+)$`.
+- Calibrate the printed-page → PDF-page offset using the first chapter of the Glory section (similar offset-search to the Upanishads parser).
+- For each chapter: concatenate pages from its start to the next chapter's start − 1, strip running headers (Samhita/section names) and bare page numbers, collapse soft line breaks, split into paragraph "verses".
+- Output:
+  - `src/data/shiva-purana.json` — full text
+  - `src/data/shiva-purana-index.json` — lightweight list for browse
+- The PDF itself is **not** shipped (text only).
 
-**Data shape**
+### 2. Data layer (`src/data/shiva-purana.ts`)
+
 ```ts
-type Upanishad = {
-  id: string;           // "aitareya"
-  number: number;       // 1..108
-  title: string;        // "Aitareya Upanishad"
-  veda: "Rig" | "Shukla Yajur" | "Krishna Yajur" | "Sama" | "Atharva";
-  verses: { id?: string; text: string }[];
+export type Samhita =
+  | "Glory" | "Vidyesvara" | "Rudra" | "Satarudra"
+  | "Kotirudra" | "Uma" | "Kailasa" | "Vayaviya";
+
+export type ShivaChapter = {
+  id: string;            // "rudra-sati-17-marriage-of-siva-and-sati"
+  number: number;        // chapter # within its section
+  globalNumber: number;  // 1..N across whole text, for prev/next ordering
+  title: string;
+  samhita: Samhita;
+  section?: string;      // e.g. "Section II — Sati" or "Purvabhaga"
+  verses: { text: string }[];
 };
 ```
 
-**Routes**
-```text
+Plus `SAMHITA_ORDER`, `getChapter(slug)`, `getNeighbors(slug)`.
+
+### 3. Routes
+
+```
 src/routes/
-  __root.tsx                    // shell + theme provider + header
-  index.tsx                     // landing
-  upanishads.tsx                // layout: <Outlet />
-  upanishads.index.tsx          // browse + filter
-  upanishads.$slug.tsx          // reader (loader reads from imported JSON)
+  shiva-purana.tsx           // layout: <Outlet />
+  shiva-purana.index.tsx     // browse: search + filter by Samhita, chapters grouped by Samhita (and Section sub-headings)
+  shiva-purana.$slug.tsx     // reader (reuses the Upanishad reader UI exactly: scroll progress, sticky title, prefs popover, ←/→ prev-next, localStorage resume)
 ```
 
-**State**
-- Reader preferences (`fontFamily`, `fontSize`, `lineHeight`, `theme`) → `localStorage` key `vachanalaya:reader-prefs`, hydrated through a small `useReaderPrefs` hook.
-- Last-read scroll position per slug → `localStorage` key `vachanalaya:progress:<slug>`.
-- Theme toggle attaches/removes `.dark` and `data-reader-theme="sepia"` on `<html>`.
+Per-route `head()` SEO with unique title/description.
 
-**Out of scope (deferred to later milestones)**
-- Full-text search across Upanishads (will add with a prebuilt MiniSearch index next).
-- User accounts, cross-device sync, notes/highlights.
-- Sanskrit / Devanagari source text, audio recitations, additional scriptures.
+### 4. Landing & navigation updates
 
-### Deliverables this milestone
+- `src/components/site-header.tsx`: add "Shiva Purana" link next to "Upanishads".
+- `src/routes/index.tsx`: add a second card/section under the Upanishad stats summarising the Shiva Purana (Samhita count, chapter count) and linking into `/shiva-purana`.
+- `/` head() text unchanged — still introduces the library as a whole.
 
-- Parsing script + generated JSON for all 108 Upanishads.
-- Landing, browse, and reader routes with the design system above.
-- Reader controls (font, size, spacing, theme) persisted locally.
-- Prev/next navigation and resume-where-you-left-off per Upanishad.
+### 5. Reader reuse (no duplication)
+
+The reader on `/upanishads/$slug` and the new `/shiva-purana/$slug` are visually identical. To avoid drift:
+
+- Extract the existing Upanishad reader body into `src/components/reader/text-reader.tsx` that takes `{ title, eyebrow, verses, prev, next, storageKey }`.
+- Both route files become thin wrappers that load their record and render `<TextReader …/>`.
+- `use-reader-prefs.ts` and `use-app-theme.ts` are unchanged.
+
+## Out of scope (this milestone)
+
+- Cross-text full-text search (will add MiniSearch once a third text is in).
+- Sanskrit/Devanagari source, footnotes, glossary linking.
+- User accounts / cross-device progress sync (still `localStorage`).
+- Adding Vedas / Gita / Bhagavatam — separate milestones, but the new generic `<TextReader/>` and `src/data/<text>.{json,ts}` pattern make each one a drop-in.
+
+## Deliverables
+
+- `scripts/parse_shiva_purana.py` + generated `src/data/shiva-purana.json` and `…-index.json`.
+- `src/data/shiva-purana.ts` typed accessors.
+- `src/routes/shiva-purana.tsx`, `shiva-purana.index.tsx`, `shiva-purana.$slug.tsx`.
+- `src/components/reader/text-reader.tsx`; `/upanishads/$slug` refactored to use it (no visual change).
+- Header + landing page updated to surface the new text.

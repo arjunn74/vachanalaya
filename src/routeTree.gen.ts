@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpanishadsRouteImport } from './routes/upanishads'
+import { Route as ShivaPuranaRouteImport } from './routes/shiva-purana'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
+import { Route as ShivaPuranaIndexRouteImport } from './routes/shiva-purana.index'
 import { Route as UpanishadsSlugRouteImport } from './routes/upanishads.$slug'
+import { Route as ShivaPuranaSlugRouteImport } from './routes/shiva-purana.$slug'
 
 const UpanishadsRoute = UpanishadsRouteImport.update({
   id: '/upanishads',
   path: '/upanishads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShivaPuranaRoute = ShivaPuranaRouteImport.update({
+  id: '/shiva-purana',
+  path: '/shiva-purana',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -29,40 +37,79 @@ const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => UpanishadsRoute,
 } as any)
+const ShivaPuranaIndexRoute = ShivaPuranaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShivaPuranaRoute,
+} as any)
 const UpanishadsSlugRoute = UpanishadsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => UpanishadsRoute,
 } as any)
+const ShivaPuranaSlugRoute = ShivaPuranaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ShivaPuranaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/shiva-purana': typeof ShivaPuranaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/shiva-purana/': typeof ShivaPuranaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/shiva-purana': typeof ShivaPuranaIndexRoute
   '/upanishads': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/shiva-purana': typeof ShivaPuranaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/shiva-purana/': typeof ShivaPuranaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
+  fullPaths:
+    | '/'
+    | '/shiva-purana'
+    | '/upanishads'
+    | '/shiva-purana/$slug'
+    | '/upanishads/$slug'
+    | '/shiva-purana/'
+    | '/upanishads/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/upanishads/$slug' | '/upanishads'
-  id: '__root__' | '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
+  to:
+    | '/'
+    | '/shiva-purana/$slug'
+    | '/upanishads/$slug'
+    | '/shiva-purana'
+    | '/upanishads'
+  id:
+    | '__root__'
+    | '/'
+    | '/shiva-purana'
+    | '/upanishads'
+    | '/shiva-purana/$slug'
+    | '/upanishads/$slug'
+    | '/shiva-purana/'
+    | '/upanishads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShivaPuranaRoute: typeof ShivaPuranaRouteWithChildren
   UpanishadsRoute: typeof UpanishadsRouteWithChildren
 }
 
@@ -73,6 +120,13 @@ declare module '@tanstack/react-router' {
       path: '/upanishads'
       fullPath: '/upanishads'
       preLoaderRoute: typeof UpanishadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shiva-purana': {
+      id: '/shiva-purana'
+      path: '/shiva-purana'
+      fullPath: '/shiva-purana'
+      preLoaderRoute: typeof ShivaPuranaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -89,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpanishadsIndexRouteImport
       parentRoute: typeof UpanishadsRoute
     }
+    '/shiva-purana/': {
+      id: '/shiva-purana/'
+      path: '/'
+      fullPath: '/shiva-purana/'
+      preLoaderRoute: typeof ShivaPuranaIndexRouteImport
+      parentRoute: typeof ShivaPuranaRoute
+    }
     '/upanishads/$slug': {
       id: '/upanishads/$slug'
       path: '/$slug'
@@ -96,8 +157,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpanishadsSlugRouteImport
       parentRoute: typeof UpanishadsRoute
     }
+    '/shiva-purana/$slug': {
+      id: '/shiva-purana/$slug'
+      path: '/$slug'
+      fullPath: '/shiva-purana/$slug'
+      preLoaderRoute: typeof ShivaPuranaSlugRouteImport
+      parentRoute: typeof ShivaPuranaRoute
+    }
   }
 }
+
+interface ShivaPuranaRouteChildren {
+  ShivaPuranaSlugRoute: typeof ShivaPuranaSlugRoute
+  ShivaPuranaIndexRoute: typeof ShivaPuranaIndexRoute
+}
+
+const ShivaPuranaRouteChildren: ShivaPuranaRouteChildren = {
+  ShivaPuranaSlugRoute: ShivaPuranaSlugRoute,
+  ShivaPuranaIndexRoute: ShivaPuranaIndexRoute,
+}
+
+const ShivaPuranaRouteWithChildren = ShivaPuranaRoute._addFileChildren(
+  ShivaPuranaRouteChildren,
+)
 
 interface UpanishadsRouteChildren {
   UpanishadsSlugRoute: typeof UpanishadsSlugRoute
@@ -115,18 +197,9 @@ const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShivaPuranaRoute: ShivaPuranaRouteWithChildren,
   UpanishadsRoute: UpanishadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
