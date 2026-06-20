@@ -67,12 +67,18 @@ FI_START_RE = _build_start_re([s for s in FI_STEMS if s not in ("ic", "ive", "ir
 FL_START_RE = _build_start_re([s for s in FL_STEMS if s not in ("ow", "ame", "ag")])
 
 def fix_ligatures(text: str) -> str:
-    text = FI_JOIN_RE.sub(lambda m: "fi" + m.group(1), text)
-    text = FL_JOIN_RE.sub(lambda m: "fl" + m.group(1), text)
-    # only apply start-of-token rules cautiously
-    text = re.sub(r"\b ight\b", " fight", text)
-    text = re.sub(r"\b ind\b", " find", text)
-    text = re.sub(r"\b ire\b", " fire", text)
+    # The PDF dropped the literal 'f' from fi/fl ligatures and inserted a
+    # space. Stems already begin with i/l, so we only prepend 'f'.
+    text = FI_JOIN_RE.sub(lambda m: "f" + m.group(1), text)
+    text = FL_JOIN_RE.sub(lambda m: "f" + m.group(1), text)
+    # Common start-of-token cases
+    for stem in ("ight", "ind", "ire", "ield", "irst", "ifty", "ifteen",
+                 "inal", "inally", "inish", "inished", "ish", "ive",
+                 "icant", "ication", "icial"):
+        text = re.sub(r"(?<![A-Za-z])" + stem + r"\b", "f" + stem, text)
+    for stem in ("ight", "ow", "ower", "owing", "uence", "uent",
+                 "uid", "oor", "ock", "ood", "ush", "ame"):
+        text = re.sub(r"(?<![A-Za-z])" + stem + r"\b", "f" + stem, text)
     return text
 
 def extract_text() -> str:
