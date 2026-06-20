@@ -28,7 +28,7 @@ function Home() {
           A digital library of Hindu texts
         </p>
         <h1 className="font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl">
-          वचनालय <span className="text-muted-foreground">·</span> Vachanalaya
+          वाचनालय <span className="text-muted-foreground">·</span> Vachanalaya
         </h1>
         <p className="mt-6 max-w-xl text-lg text-muted-foreground">
           A quiet place to read the foundational texts of the Indian tradition.
