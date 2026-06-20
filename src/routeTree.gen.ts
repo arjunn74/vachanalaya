@@ -9,38 +9,72 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpanishadsRouteImport } from './routes/upanishads'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
+import { Route as UpanishadsSlugRouteImport } from './routes/upanishads.$slug'
 
+const UpanishadsRoute = UpanishadsRouteImport.update({
+  id: '/upanishads',
+  path: '/upanishads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UpanishadsRoute,
+} as any)
+const UpanishadsSlugRoute = UpanishadsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => UpanishadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/upanishads': typeof UpanishadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/upanishads': typeof UpanishadsRouteWithChildren
+  '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/upanishads/': typeof UpanishadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/upanishads/$slug' | '/upanishads'
+  id: '__root__' | '/' | '/upanishads' | '/upanishads/$slug' | '/upanishads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UpanishadsRoute: typeof UpanishadsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/upanishads': {
+      id: '/upanishads'
+      path: '/upanishads'
+      fullPath: '/upanishads'
+      preLoaderRoute: typeof UpanishadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +82,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/upanishads/': {
+      id: '/upanishads/'
+      path: '/'
+      fullPath: '/upanishads/'
+      preLoaderRoute: typeof UpanishadsIndexRouteImport
+      parentRoute: typeof UpanishadsRoute
+    }
+    '/upanishads/$slug': {
+      id: '/upanishads/$slug'
+      path: '/$slug'
+      fullPath: '/upanishads/$slug'
+      preLoaderRoute: typeof UpanishadsSlugRouteImport
+      parentRoute: typeof UpanishadsRoute
+    }
   }
 }
 
+interface UpanishadsRouteChildren {
+  UpanishadsSlugRoute: typeof UpanishadsSlugRoute
+  UpanishadsIndexRoute: typeof UpanishadsIndexRoute
+}
+
+const UpanishadsRouteChildren: UpanishadsRouteChildren = {
+  UpanishadsSlugRoute: UpanishadsSlugRoute,
+  UpanishadsIndexRoute: UpanishadsIndexRoute,
+}
+
+const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
+  UpanishadsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UpanishadsRoute: UpanishadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

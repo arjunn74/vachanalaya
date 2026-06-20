@@ -1,0 +1,758 @@
+[
+  {
+    "id": "aitareya",
+    "number": 1,
+    "title": "Aitareya Upanishad",
+    "veda": "Rig",
+    "verseCount": 34
+  },
+  {
+    "id": "aksha-malika",
+    "number": 2,
+    "title": "Aksha Malika Upanishad",
+    "veda": "Rig",
+    "verseCount": 4
+  },
+  {
+    "id": "atma-bodha",
+    "number": 3,
+    "title": "Atma-Bodha Upanishad",
+    "veda": "Rig",
+    "verseCount": 8
+  },
+  {
+    "id": "bahvricha",
+    "number": 4,
+    "title": "Bahvricha Upanishad",
+    "veda": "Rig",
+    "verseCount": 2
+  },
+  {
+    "id": "kaushitaki-brahmana",
+    "number": 5,
+    "title": "Kaushitaki Brahmana Upanishad",
+    "veda": "Rig",
+    "verseCount": 55
+  },
+  {
+    "id": "mudgala",
+    "number": 6,
+    "title": "Mudgala Upanishad",
+    "veda": "Rig",
+    "verseCount": 3
+  },
+  {
+    "id": "nada-bindu",
+    "number": 7,
+    "title": "Nada Bindu Upanishad",
+    "veda": "Rig",
+    "verseCount": 2
+  },
+  {
+    "id": "nirvana",
+    "number": 8,
+    "title": "Nirvana Upanishad",
+    "veda": "Rig",
+    "verseCount": 4
+  },
+  {
+    "id": "saubhagya-lakshmi",
+    "number": 9,
+    "title": "Saubhagya Lakshmi Upanishad",
+    "veda": "Rig",
+    "verseCount": 48
+  },
+  {
+    "id": "tripura",
+    "number": 10,
+    "title": "Tripura Upanishad",
+    "veda": "Rig",
+    "verseCount": 5
+  },
+  {
+    "id": "adhyatma",
+    "number": 11,
+    "title": "Adhyatma Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 4
+  },
+  {
+    "id": "advaya-taraka",
+    "number": 12,
+    "title": "Advaya Taraka Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "bhikshuka",
+    "number": 13,
+    "title": "Bhikshuka Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "brihadaranyaka",
+    "number": 14,
+    "title": "Brihadaranyaka Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 433
+  },
+  {
+    "id": "hamsa",
+    "number": 15,
+    "title": "Hamsa Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "isavasya",
+    "number": 16,
+    "title": "Isavasya Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "jabala",
+    "number": 17,
+    "title": "Jabala Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 15
+  },
+  {
+    "id": "mandala-brahmana",
+    "number": 18,
+    "title": "Mandala Brahmana Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "mantrika",
+    "number": 19,
+    "title": "Mantrika Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "muktika",
+    "number": 20,
+    "title": "Muktika Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 42
+  },
+  {
+    "id": "niralamba",
+    "number": 21,
+    "title": "Niralamba Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "paingala",
+    "number": 22,
+    "title": "Paingala Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 72
+  },
+  {
+    "id": "paramahamsa",
+    "number": 23,
+    "title": "Paramahamsa Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "satyayaniya",
+    "number": 24,
+    "title": "Satyayaniya Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 5
+  },
+  {
+    "id": "subala",
+    "number": 25,
+    "title": "Subala Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 8
+  },
+  {
+    "id": "tara-sara",
+    "number": 26,
+    "title": "Tara Sara Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "trisikhi-brahmana",
+    "number": 27,
+    "title": "Trisikhi Brahmana Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 4
+  },
+  {
+    "id": "turiyatita-avadhuta",
+    "number": 28,
+    "title": "Turiyatita Avadhuta Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "yajnavalkya",
+    "number": 29,
+    "title": "Yajnavalkya Upanishad",
+    "veda": "Shukla Yajur",
+    "verseCount": 5
+  },
+  {
+    "id": "akshi",
+    "number": 30,
+    "title": "Akshi Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 4
+  },
+  {
+    "id": "amrita-bindu",
+    "number": 31,
+    "title": "Amrita Bindu Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "amrita-nada",
+    "number": 32,
+    "title": "Amrita-Nada Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "avadhuta",
+    "number": 33,
+    "title": "Avadhuta Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "brahma-vidya",
+    "number": 34,
+    "title": "Brahma Vidya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "brahma",
+    "number": 35,
+    "title": "Brahma Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 6
+  },
+  {
+    "id": "dakshinamurti",
+    "number": 36,
+    "title": "Dakshinamurti Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "dhyana-bindu",
+    "number": 37,
+    "title": "Dhyana-Bindu Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "ekakshara",
+    "number": 38,
+    "title": "Ekakshara Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "garbha",
+    "number": 39,
+    "title": "Garbha Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "kaivalya",
+    "number": 40,
+    "title": "Kaivalya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "kalagni-rudra",
+    "number": 41,
+    "title": "Kalagni Rudra Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "kali-santarana",
+    "number": 42,
+    "title": "Kali Santarana Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "katha",
+    "number": 43,
+    "title": "Katha Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 122
+  },
+  {
+    "id": "katharudra",
+    "number": 44,
+    "title": "Katharudra Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 4
+  },
+  {
+    "id": "kshurika",
+    "number": 45,
+    "title": "Kshurika Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "maha-narayana",
+    "number": 46,
+    "title": "Maha Narayana Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 155
+  },
+  {
+    "id": "narayana-muktika-other-version",
+    "number": 47,
+    "title": "Narayana Upanishad (Muktika Upanishad other version) Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 3
+  },
+  {
+    "id": "pancha-brahma",
+    "number": 48,
+    "title": "Pancha Brahma Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "pranagnihotra",
+    "number": 49,
+    "title": "Pranagnihotra Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 4
+  },
+  {
+    "id": "rudra-hridaya",
+    "number": 50,
+    "title": "Rudra Hridaya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 1
+  },
+  {
+    "id": "sarasvati-rahasya",
+    "number": 51,
+    "title": "Sarasvati-Rahasya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 11
+  },
+  {
+    "id": "sariraka",
+    "number": 52,
+    "title": "Sariraka Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "sarva-sara",
+    "number": 53,
+    "title": "Sarva Sara Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "skanda",
+    "number": 54,
+    "title": "Skanda Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "suka-rahasya",
+    "number": 55,
+    "title": "Suka Rahasya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 5
+  },
+  {
+    "id": "svetasvatara",
+    "number": 56,
+    "title": "Svetasvatara Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 112
+  },
+  {
+    "id": "taittiriya",
+    "number": 57,
+    "title": "Taittiriya Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 39
+  },
+  {
+    "id": "tejo-bindu",
+    "number": 58,
+    "title": "Tejo-Bindu Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 13
+  },
+  {
+    "id": "varaha",
+    "number": 59,
+    "title": "Varaha Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 17
+  },
+  {
+    "id": "yoga-kundalini",
+    "number": 60,
+    "title": "Yoga-Kundalini Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 9
+  },
+  {
+    "id": "yoga-sikha",
+    "number": 61,
+    "title": "Yoga Sikha Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 2
+  },
+  {
+    "id": "yoga-tattva",
+    "number": 62,
+    "title": "Yoga Tattva Upanishad",
+    "veda": "Krishna Yajur",
+    "verseCount": 7
+  },
+  {
+    "id": "aruni",
+    "number": 63,
+    "title": "Aruni Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "avyakta",
+    "number": 64,
+    "title": "Avyakta Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "chandogya",
+    "number": 65,
+    "title": "Chandogya Upanishad",
+    "veda": "Sama",
+    "verseCount": 599
+  },
+  {
+    "id": "jabala-darsana",
+    "number": 66,
+    "title": "Jabala Darsana Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "jabali",
+    "number": 67,
+    "title": "Jabali Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "kena",
+    "number": 68,
+    "title": "Kena Upanishad",
+    "veda": "Sama",
+    "verseCount": 35
+  },
+  {
+    "id": "kundika",
+    "number": 69,
+    "title": "Kundika Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "maha",
+    "number": 70,
+    "title": "Maha Upanishad",
+    "veda": "Sama",
+    "verseCount": 226
+  },
+  {
+    "id": "maitrayani",
+    "number": 71,
+    "title": "Maitrayani Upanishad",
+    "veda": "Sama",
+    "verseCount": 1
+  },
+  {
+    "id": "maitreya",
+    "number": 72,
+    "title": "Maitreya Upanishad",
+    "veda": "Sama",
+    "verseCount": 72
+  },
+  {
+    "id": "rudraksha-jabala",
+    "number": 73,
+    "title": "Rudraksha Jabala Upanishad",
+    "veda": "Sama",
+    "verseCount": 4
+  },
+  {
+    "id": "sannyasa",
+    "number": 74,
+    "title": "Sannyasa Upanishad",
+    "veda": "Sama",
+    "verseCount": 9
+  },
+  {
+    "id": "savitri",
+    "number": 75,
+    "title": "Savitri Upanishad",
+    "veda": "Sama",
+    "verseCount": 3
+  },
+  {
+    "id": "vajrasuchika",
+    "number": 76,
+    "title": "Vajrasuchika Upanishad",
+    "veda": "Sama",
+    "verseCount": 2
+  },
+  {
+    "id": "vasudeva",
+    "number": 77,
+    "title": "Vasudeva Upanishad",
+    "veda": "Sama",
+    "verseCount": 1
+  },
+  {
+    "id": "yoga-chudamani",
+    "number": 78,
+    "title": "Yoga Chudamani Upanishad",
+    "veda": "Sama",
+    "verseCount": 3
+  },
+  {
+    "id": "annapurna",
+    "number": 79,
+    "title": "Annapurna Upanishad",
+    "veda": "Atharva",
+    "verseCount": 325
+  },
+  {
+    "id": "atharvasikha",
+    "number": 80,
+    "title": "Atharvasikha Upanishad",
+    "veda": "Atharva",
+    "verseCount": 1
+  },
+  {
+    "id": "atharvasiras",
+    "number": 81,
+    "title": "Atharvasiras Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "atma",
+    "number": 82,
+    "title": "Atma Upanishad",
+    "veda": "Atharva",
+    "verseCount": 21
+  },
+  {
+    "id": "bhasma-jabala",
+    "number": 83,
+    "title": "Bhasma Jabala Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "bhavana",
+    "number": 84,
+    "title": "Bhavana Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "brihad-jabala",
+    "number": 85,
+    "title": "Brihad Jabala Upanishad",
+    "veda": "Atharva",
+    "verseCount": 3
+  },
+  {
+    "id": "dattatreya",
+    "number": 86,
+    "title": "Dattatreya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 3
+  },
+  {
+    "id": "devi",
+    "number": 87,
+    "title": "Devi Upanishad",
+    "veda": "Atharva",
+    "verseCount": 5
+  },
+  {
+    "id": "ganapati",
+    "number": 88,
+    "title": "Ganapati Upanishad",
+    "veda": "Atharva",
+    "verseCount": 1
+  },
+  {
+    "id": "garuda",
+    "number": 89,
+    "title": "Garuda Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "gopala-tapaniya",
+    "number": 90,
+    "title": "Gopala-Tapaniya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 5
+  },
+  {
+    "id": "hayagriva",
+    "number": 91,
+    "title": "Hayagriva Upanishad",
+    "veda": "Atharva",
+    "verseCount": 3
+  },
+  {
+    "id": "krishna",
+    "number": 92,
+    "title": "Krishna Upanishad",
+    "veda": "Atharva",
+    "verseCount": 1
+  },
+  {
+    "id": "maha-vakya",
+    "number": 93,
+    "title": "Maha Vakya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 1
+  },
+  {
+    "id": "mandukya",
+    "number": 94,
+    "title": "Mandukya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 215
+  },
+  {
+    "id": "mundaka",
+    "number": 95,
+    "title": "Mundaka Upanishad",
+    "veda": "Atharva",
+    "verseCount": 64
+  },
+  {
+    "id": "narada-parivrajaka",
+    "number": 96,
+    "title": "Narada Parivrajaka Upanishad",
+    "veda": "Atharva",
+    "verseCount": 277
+  },
+  {
+    "id": "nrisimha-tapaniya",
+    "number": 97,
+    "title": "Nrisimha Tapaniya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 6
+  },
+  {
+    "id": "para-brahma",
+    "number": 98,
+    "title": "Para-Brahma Upanishad",
+    "veda": "Atharva",
+    "verseCount": 3
+  },
+  {
+    "id": "paramahamsa-parivrajaka",
+    "number": 99,
+    "title": "Paramahamsa-Parivrajaka Upanishad",
+    "veda": "Atharva",
+    "verseCount": 4
+  },
+  {
+    "id": "pasupata-brahmana",
+    "number": 100,
+    "title": "Pasupata Brahmana Upanishad",
+    "veda": "Atharva",
+    "verseCount": 1
+  },
+  {
+    "id": "prasna",
+    "number": 101,
+    "title": "Prasna Upanishad",
+    "veda": "Atharva",
+    "verseCount": 69
+  },
+  {
+    "id": "rama-rahasya",
+    "number": 102,
+    "title": "Rama Rahasya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 17
+  },
+  {
+    "id": "rama-tapaniya",
+    "number": 103,
+    "title": "Rama Tapaniya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 4
+  },
+  {
+    "id": "sandilya",
+    "number": 104,
+    "title": "Sandilya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 10
+  },
+  {
+    "id": "sarabha",
+    "number": 105,
+    "title": "Sarabha Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "sita",
+    "number": 106,
+    "title": "Sita Upanishad",
+    "veda": "Atharva",
+    "verseCount": 6
+  },
+  {
+    "id": "surya",
+    "number": 107,
+    "title": "Surya Upanishad",
+    "veda": "Atharva",
+    "verseCount": 2
+  },
+  {
+    "id": "tripadvibhuti-mahanarayana",
+    "number": 108,
+    "title": "Tripadvibhuti Mahanarayana Upanishad",
+    "veda": "Atharva",
+    "verseCount": 142
+  }
+]
