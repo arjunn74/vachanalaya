@@ -85,6 +85,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Read the 108 Upanishads in English with a calm, focused reader designed for study and reflection." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Vachanalaya — A digital library of Hindu texts" },
+      { name: "twitter:description", content: "Read the 108 Upanishads in English with a calm, focused reader designed for study and reflection." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/8c911363-4d6c-40eb-a921-dbec22658d7f" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/8c911363-4d6c-40eb-a921-dbec22658d7f" },
     ],
     links: [
       {
