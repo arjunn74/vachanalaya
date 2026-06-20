@@ -139,7 +139,7 @@ function GitaReader() {
         </header>
 
         <div className="space-y-10">
-          {chapter.verses.map((v, i) => (
+          {chapter.verses.map((v: { id?: string; text: string }, i: number) => (
             <section key={i} className="group relative">
               {v.id && (
                 <div className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-reader-muted)]">
