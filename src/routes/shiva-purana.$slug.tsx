@@ -14,11 +14,12 @@ export const Route = createFileRoute("/shiva-purana/$slug")({
   },
   head: ({ loaderData }) => {
     const c = loaderData?.chapter;
-    const title = c
-      ? `${c.title} — ${SHIVA_SECTION_META[c.section].full} — Vachanalaya`
+    const secKey = c?.section as keyof typeof SHIVA_SECTION_META | undefined;
+    const title = c && secKey
+      ? `${c.title} — ${SHIVA_SECTION_META[secKey].full} — Vachanalaya`
       : "Shiva Purana — Vachanalaya";
-    const desc = c
-      ? `Read “${c.title}” from the ${SHIVA_SECTION_META[c.section].full} of the Shiva Purana in English translation.`
+    const desc = c && secKey
+      ? `Read “${c.title}” from the ${SHIVA_SECTION_META[secKey].full} of the Shiva Purana in English translation.`
       : "Read the Shiva Purana on Vachanalaya.";
     return {
       meta: [
@@ -49,7 +50,7 @@ export const Route = createFileRoute("/shiva-purana/$slug")({
 function Reader() {
   const { chapter } = Route.useLoaderData();
   const { prev, next } = getShivaNeighbors(chapter.id);
-  const meta = SHIVA_SECTION_META[chapter.section];
+  const meta = SHIVA_SECTION_META[chapter.section as keyof typeof SHIVA_SECTION_META];
 
   return (
     <TextReader
