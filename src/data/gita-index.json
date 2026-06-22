@@ -1,0 +1,164 @@
+[
+  {
+    "id": "chapter-1",
+    "number": 1,
+    "name": "अर्जुनविषादयोग",
+    "translation": "Arjuna Visada Yoga",
+    "transliteration": "Arjun Viṣhād Yog",
+    "meaning": "Arjuna's Dilemma",
+    "verseCount": 47
+  },
+  {
+    "id": "chapter-2",
+    "number": 2,
+    "name": "सांख्ययोग",
+    "translation": "Sankhya Yoga",
+    "transliteration": "Sānkhya Yog",
+    "meaning": "Transcendental Knowledge",
+    "verseCount": 72
+  },
+  {
+    "id": "chapter-3",
+    "number": 3,
+    "name": "कर्मयोग",
+    "translation": "Karma Yoga",
+    "transliteration": "Karm Yog",
+    "meaning": "Path of Selfless Service",
+    "verseCount": 43
+  },
+  {
+    "id": "chapter-4",
+    "number": 4,
+    "name": "ज्ञानकर्मसंन्यासयोग",
+    "translation": "Jnana Karma Sanyasa Yoga",
+    "transliteration": "Jñāna Karm Sanyās Yog",
+    "meaning": "Path of Knowledge and the Disciplines of Action",
+    "verseCount": 42
+  },
+  {
+    "id": "chapter-5",
+    "number": 5,
+    "name": "कर्मसंन्यासयोग",
+    "translation": "Karma Sanyasa Yoga",
+    "transliteration": "Karm Sanyās Yog",
+    "meaning": "Path of Renunciation",
+    "verseCount": 29
+  },
+  {
+    "id": "chapter-6",
+    "number": 6,
+    "name": "ध्यानयोग",
+    "translation": "Dhyana Yoga",
+    "transliteration": "Dhyān Yog",
+    "meaning": "Path of Meditation",
+    "verseCount": 47
+  },
+  {
+    "id": "chapter-7",
+    "number": 7,
+    "name": "ज्ञानविज्ञानयोग",
+    "translation": "Gyaan Vigyana Yoga",
+    "transliteration": "Jñāna Vijñāna Yog",
+    "meaning": "Self-Knowledge and Enlightenment",
+    "verseCount": 30
+  },
+  {
+    "id": "chapter-8",
+    "number": 8,
+    "name": "अक्षरब्रह्मयोग",
+    "translation": "Akshara Brahma Yoga",
+    "transliteration": "Akṣhar Brahma Yog",
+    "meaning": "Path of the Eternal God",
+    "verseCount": 28
+  },
+  {
+    "id": "chapter-9",
+    "number": 9,
+    "name": "राजविद्याराजगुह्ययोग",
+    "translation": "Raja Vidya Yoga",
+    "transliteration": "Rāja Vidyā Yog",
+    "meaning": "Yoga through the King of Sciences",
+    "verseCount": 34
+  },
+  {
+    "id": "chapter-10",
+    "number": 10,
+    "name": "विभूतियोग",
+    "translation": "Vibhooti Yoga",
+    "transliteration": "Vibhūti Yog",
+    "meaning": "Yoga through Appreciating the Infinite Opulences of God",
+    "verseCount": 42
+  },
+  {
+    "id": "chapter-11",
+    "number": 11,
+    "name": "विश्वरूपदर्शनयोग",
+    "translation": "Vishwaroopa Darshana Yoga",
+    "transliteration": "Viśhwarūp Darśhan Yog",
+    "meaning": "Yoga through Beholding the Cosmic Form of God",
+    "verseCount": 55
+  },
+  {
+    "id": "chapter-12",
+    "number": 12,
+    "name": "भक्तियोग",
+    "translation": "Bhakti Yoga",
+    "transliteration": "Bhakti Yog",
+    "meaning": "The Yoga of Devotion",
+    "verseCount": 20
+  },
+  {
+    "id": "chapter-13",
+    "number": 13,
+    "name": "क्षेत्र-क्षेत्रज्ञविभागयोग",
+    "translation": "Ksetra Ksetrajna Vibhaaga Yoga",
+    "transliteration": "Kṣhetra Kṣhetrajña Vibhāg Yog",
+    "meaning": "Yoga through Distinguishing the Field and the Knower of the Field",
+    "verseCount": 35
+  },
+  {
+    "id": "chapter-14",
+    "number": 14,
+    "name": "गुणत्रयविभागयोग",
+    "translation": "Gunatraya Vibhaga Yoga",
+    "transliteration": "Guṇa Traya Vibhāg Yog",
+    "meaning": "Yoga through Understanding the Three Modes of Material Nature",
+    "verseCount": 27
+  },
+  {
+    "id": "chapter-15",
+    "number": 15,
+    "name": "पुरुषोत्तमयोग",
+    "translation": "Purushottama Yoga",
+    "transliteration": "Puruṣhottam Yog",
+    "meaning": "The Yoga of the Supreme Divine Personality",
+    "verseCount": 20
+  },
+  {
+    "id": "chapter-16",
+    "number": 16,
+    "name": "दैवासुरसम्पद्विभागयोग",
+    "translation": "Daivasura Sampad Vibhaga Yoga",
+    "transliteration": "Daivāsura Sampad Vibhāg Yog",
+    "meaning": "Yoga through Discerning the Divine and Demoniac Natures",
+    "verseCount": 24
+  },
+  {
+    "id": "chapter-17",
+    "number": 17,
+    "name": "श्रद्धात्रयविभागयोग",
+    "translation": "Sraddhatraya Vibhaga Yoga",
+    "transliteration": "Śhraddhā Traya Vibhāg Yog",
+    "meaning": "Yoga through Discerning the Three Divisions of Faith",
+    "verseCount": 28
+  },
+  {
+    "id": "chapter-18",
+    "number": 18,
+    "name": "मोक्षसंन्यासयोग",
+    "translation": "Moksha Sanyaas Yoga",
+    "transliteration": "Mokṣha Sanyās Yog",
+    "meaning": "Yoga through the Perfection of Renunciation and Surrender",
+    "verseCount": 78
+  }
+]
