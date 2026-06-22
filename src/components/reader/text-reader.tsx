@@ -8,7 +8,14 @@ import {
   type ReaderPrefs,
 } from "@/hooks/use-reader-prefs";
 
-export type ReaderVerse = { id?: string; text: string };
+export type ReaderVerse = {
+  id?: string;
+  text: string;
+  /** Optional original-language block (e.g. Devanagari) shown above text. */
+  sanskrit?: string;
+  /** Optional IAST / romanized transliteration shown between sanskrit and text. */
+  transliteration?: string;
+};
 
 export type ReaderNeighbor = {
   slug: string;
@@ -166,7 +173,17 @@ export function TextReader({
                   {v.id}
                 </span>
               )}
-              <p className="text-[1em]">{v.text}</p>
+              {v.sanskrit && (
+                <p className="mb-2 whitespace-pre-line font-serif text-[1.05em] leading-relaxed text-[var(--color-reader-fg)]">
+                  {v.sanskrit}
+                </p>
+              )}
+              {v.transliteration && (
+                <p className="mb-2 whitespace-pre-line text-[0.85em] italic text-[var(--color-reader-muted)]">
+                  {v.transliteration}
+                </p>
+              )}
+              <p className="whitespace-pre-line text-[1em]">{v.text}</p>
             </div>
           ))}
         </div>
