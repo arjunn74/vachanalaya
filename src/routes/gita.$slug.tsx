@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getGitaChapter, getGitaNeighbors } from "@/data/gita";
+import { getGitaChapter, getGitaNeighbors, type GitaVerse } from "@/data/gita";
 import { TextReader, type ReaderVerse } from "@/components/reader/text-reader";
 
 export const Route = createFileRoute("/gita/$slug")({
@@ -46,7 +46,7 @@ function Reader() {
   const { chapter } = Route.useLoaderData();
   const { prev, next } = getGitaNeighbors(chapter.id);
 
-  const verses: ReaderVerse[] = chapter.verses.map((v) => ({
+  const verses: ReaderVerse[] = chapter.verses.map((v: GitaVerse) => ({
     id: v.id,
     sanskrit: v.sanskrit,
     transliteration: v.transliteration,

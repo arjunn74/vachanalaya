@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { upanishadIndex, VEDA_ORDER } from "@/data/upanishads";
 import { shivaIndex, SHIVA_SECTION_ORDER, SHIVA_SECTION_META } from "@/data/shiva-purana";
+import { gitaIndex, GITA_TOTAL_VERSES } from "@/data/gita";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -66,17 +67,40 @@ function Home() {
         ))}
       </section>
 
-      <section className="mt-24">
-        <div className="mb-6 flex items-baseline justify-between">
+      <section className="mt-24 space-y-6">
+        <div className="mb-2 flex items-baseline justify-between">
           <h2 className="font-serif text-2xl tracking-tight">Also in the library</h2>
-          <Link to="/shiva-purana" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-            Open the Shiva Purana →
-          </Link>
         </div>
+
         <div className="rounded-2xl border border-border p-6 md:p-8">
-          <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Shiva Purana · {shivaIndex.length} chapters
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Bhagavad Gita · {gitaIndex.length} chapters · {GITA_TOTAL_VERSES} verses
+            </p>
+            <Link to="/gita" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+              Open →
+            </Link>
+          </div>
+          <h3 className="mt-2 font-serif text-3xl tracking-tight">
+            The Song of the Lord
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            All 18 chapters of the Shrimad Bhagavad Gita in Sanskrit with
+            transliteration and English translation — Arjuna's dilemma, the
+            yogas of knowledge, action and devotion, and the vision of the
+            cosmic form.
           </p>
+        </div>
+
+        <div className="rounded-2xl border border-border p-6 md:p-8">
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Shiva Purana · {shivaIndex.length} chapters
+            </p>
+            <Link to="/shiva-purana" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+              Open →
+            </Link>
+          </div>
           <h3 className="mt-2 font-serif text-3xl tracking-tight">
             Mahatmya, Vidyesvara &amp; Rudra Samhitas
           </h3>
