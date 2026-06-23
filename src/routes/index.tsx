@@ -1,8 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { upanishadIndex, VEDA_ORDER } from "@/data/upanishads";
-import { shivaIndex, SHIVA_SECTION_ORDER, SHIVA_SECTION_META } from "@/data/shiva-purana";
 import { gitaIndex, GITA_TOTAL_VERSES } from "@/data/gita";
+import { getPuranaIndex, PURANA_META, type PuranaSlug } from "@/lib/purana";
+
+const PURANA_CARDS: PuranaSlug[] = [
+  "shiva-purana",
+  "bhagavata-purana",
+  "brahma-purana",
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -92,35 +98,43 @@ function Home() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border p-6 md:p-8">
-          <div className="flex items-baseline justify-between gap-4">
-            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              Shiva Purana · {shivaIndex.length} chapters
-            </p>
-            <Link to="/shiva-purana" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-              Open →
-            </Link>
-          </div>
-          <h3 className="mt-2 font-serif text-3xl tracking-tight">
-            Mahatmya, Vidyesvara &amp; Rudra Samhitas
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            The first volume of the Shiva Purana in English — seven sections covering
-            the glory of the text, the worship of the lingam, the cosmogony, and the
-            stories of Sati, Parvati, Kumara and the wars of Siva.
-          </p>
-          <ul className="mt-6 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-3">
-            {SHIVA_SECTION_ORDER.map((s) => {
-              const count = shivaIndex.filter((c) => c.section === s).length;
-              return (
-                <li key={s} className="flex items-baseline justify-between gap-3">
-                  <span>{SHIVA_SECTION_META[s].full}</span>
-                  <span className="text-xs tabular-nums text-muted-foreground">{count}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {PURANA_CARDS.map((slug) => {
+          const idx = getPuranaIndex(slug);
+          const meta = PURANA_META[slug];
+          return (
+            <div key={slug} className="rounded-2xl border border-border p-6 md:p-8">
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {meta.name} · {idx.totalChapters} chapters
+                </p>
+                <Link
+                  to={`/${slug}` as never}
+                  className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                >
+                  Open →
+                </Link>
+              </div>
+              <h3 className="mt-2 font-serif text-3xl tracking-tight">
+                {meta.tagline}
+              </h3>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                {meta.blurb}
+              </p>
+              {idx.sections.length > 1 && (
+                <ul className="mt-6 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-3">
+                  {idx.sections.map((s) => (
+                    <li key={s.key} className="flex items-baseline justify-between gap-3 border-b border-border/40 pb-1">
+                      <span className="truncate">{s.label}</span>
+                      <span className="text-xs tabular-nums text-muted-foreground">
+                        {s.chapters.length}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
       </section>
 
       <section className="mt-20 grid gap-10 md:grid-cols-3">
