@@ -6,7 +6,7 @@ export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { theme, toggle, hydrated } = useAppTheme();
 
-  const isReader = /^\/(upanishads|shiva-purana|gita)\/[^/]+$/.test(pathname);
+  const isReader = /^\/(upanishads|shiva-purana|bhagavata-purana|brahma-purana|gita)\/[^/]+$/.test(pathname);
   if (isReader) return null;
 
   return (
@@ -44,7 +44,21 @@ export function SiteHeader() {
             className="rounded-md px-3 py-1.5 text-muted-foreground transition hover:text-foreground"
             activeProps={{ className: "text-foreground" }}
           >
-            Shiva Purana
+            Shiva
+          </Link>
+          <Link
+            to="/bhagavata-purana"
+            className="rounded-md px-3 py-1.5 text-muted-foreground transition hover:text-foreground"
+            activeProps={{ className: "text-foreground" }}
+          >
+            Bhagavata
+          </Link>
+          <Link
+            to="/brahma-purana"
+            className="rounded-md px-3 py-1.5 text-muted-foreground transition hover:text-foreground"
+            activeProps={{ className: "text-foreground" }}
+          >
+            Brahma
           </Link>
           <button
             type="button"
