@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PuranaBrowse } from "@/components/purana/purana-browse";
 import { PURANA_META } from "@/lib/purana";
 
-const meta = PURANA_META["shiva-purana"];
+const meta = PURANA_META["bhagavata-purana"];
 
-export const Route = createFileRoute("/shiva-purana/")({
+export const Route = createFileRoute("/bhagavata-purana/")({
   head: () => ({
     meta: [
       { title: `${meta.name} — Vachanalaya` },
@@ -13,5 +13,5 @@ export const Route = createFileRoute("/shiva-purana/")({
       { property: "og:description", content: meta.blurb },
     ],
   }),
-  component: () => <PuranaBrowse slug="shiva-purana" />,
+  component: () => <PuranaBrowse slug="bhagavata-purana" />,
 });
