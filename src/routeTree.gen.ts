@@ -14,6 +14,7 @@ import { Route as ShivaPuranaRouteImport } from './routes/shiva-purana'
 import { Route as GitaRouteImport } from './routes/gita'
 import { Route as BrahmaPuranaRouteImport } from './routes/brahma-purana'
 import { Route as BhagavataPuranaRouteImport } from './routes/bhagavata-purana'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
 import { Route as ShivaPuranaIndexRouteImport } from './routes/shiva-purana.index'
@@ -49,6 +50,11 @@ const BrahmaPuranaRoute = BrahmaPuranaRouteImport.update({
 const BhagavataPuranaRoute = BhagavataPuranaRouteImport.update({
   id: '/bhagavata-purana',
   path: '/bhagavata-purana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -109,6 +115,7 @@ const BhagavataPuranaSlugRoute = BhagavataPuranaSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bhagavata-purana': typeof BhagavataPuranaRouteWithChildren
   '/brahma-purana': typeof BrahmaPuranaRouteWithChildren
   '/gita': typeof GitaRouteWithChildren
@@ -127,6 +134,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bhagavata-purana/$slug': typeof BhagavataPuranaSlugRoute
   '/brahma-purana/$slug': typeof BrahmaPuranaSlugRoute
   '/gita/$slug': typeof GitaSlugRoute
@@ -141,6 +149,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bhagavata-purana': typeof BhagavataPuranaRouteWithChildren
   '/brahma-purana': typeof BrahmaPuranaRouteWithChildren
   '/gita': typeof GitaRouteWithChildren
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/bhagavata-purana'
     | '/brahma-purana'
     | '/gita'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/bhagavata-purana/$slug'
     | '/brahma-purana/$slug'
     | '/gita/$slug'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/bhagavata-purana'
     | '/brahma-purana'
     | '/gita'
@@ -211,6 +223,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   BhagavataPuranaRoute: typeof BhagavataPuranaRouteWithChildren
   BrahmaPuranaRoute: typeof BrahmaPuranaRouteWithChildren
   GitaRoute: typeof GitaRouteWithChildren
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/bhagavata-purana'
       fullPath: '/bhagavata-purana'
       preLoaderRoute: typeof BhagavataPuranaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -405,6 +425,7 @@ const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   BhagavataPuranaRoute: BhagavataPuranaRouteWithChildren,
   BrahmaPuranaRoute: BrahmaPuranaRouteWithChildren,
   GitaRoute: GitaRouteWithChildren,
@@ -414,13 +435,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
