@@ -100,19 +100,6 @@ function BrowsePage() {
           </li>
         )}
       </ul>
-
-      <p className="mt-12 text-xs text-muted-foreground">
-        Verse text courtesy of{" "}
-        <a
-          href="https://github.com/vedicscriptures/bhagavad-gita-api"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline-offset-4 hover:underline"
-        >
-          vedicscriptures/bhagavad-gita-api
-        </a>
-        .
-      </p>
     </main>
   );
 }
