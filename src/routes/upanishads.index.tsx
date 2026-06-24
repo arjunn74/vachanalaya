@@ -83,6 +83,18 @@ function BrowsePage() {
         </div>
       </div>
 
+      <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+        <span>▶</span>
+        <a
+          href="https://www.youtube.com/playlist?list=PLFr_jkwUp0hi4wzPEWzbncdBGAq_Qczl2"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline-offset-4 hover:underline"
+        >
+          click here to see upanishads' video
+        </a>
+      </div>
+
       <div className="mt-10 space-y-14">
         {VEDA_ORDER.map((v) => {
           const list = grouped.get(v) ?? [];
