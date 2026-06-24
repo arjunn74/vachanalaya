@@ -7,10 +7,12 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // 1. The Vite plugins array goes here at the root level!
+  plugins: [],
+
+  // 2. Your TanStack Start config remains separate
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    plugins: [],
+    // Redirect TanStack Start's bundled server entry to src/server.ts
     server: { entry: "server" },
   },
 });
