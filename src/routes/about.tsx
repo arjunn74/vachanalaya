@@ -26,7 +26,7 @@ function AboutPage() {
           Vachanalaya was born from a simple belief: the wisdom of Hindu scriptures belongs to everyone, and the younger generation deserves easy, free access to it.
         </p>
         <p>
-          Our mission is to provide the sacred texts of Sanātana Dharma — the Upanishads, Bhagavad Gītā, Śiva Purāṇa, Bhāgavata Purāṇa, Brahma Purāṇa, and more — in a clean, modern reading experience that respects the source and the reader. No paywalls, no distractions, no agenda other than sharing these texts as they are.
+          Our mission is to provide the sacred texts of Sanātana Dharma — the Upanishads, Bhagavad Gītā, Vālmīki Rāmāyaṇa, Śiva Purāṇa, Bhāgavata Purāṇa, Brahma Purāṇa, and more — in a clean, modern reading experience that respects the source and the reader. No paywalls, no distractions, no agenda other than sharing these texts as they are.
         </p>
         <p>
           We believe the youth especially need this. In a world of endless noise, these scriptures offer clarity, grounding, and a direct connection to a living tradition thousands of years old. Vachanalaya exists to make that connection possible with just a few clicks.
@@ -61,7 +61,7 @@ function AboutPage() {
       <section className="mt-10">
         <h2 className="font-serif text-2xl tracking-tight">What's inside</h2>
         <p className="mt-4 text-muted-foreground leading-relaxed">
-          The library currently includes the 108 Upanishads, the complete Bhagavad Gītā, the Śiva Purāṇa, the Śrīmad Bhāgavata Purāṇa, and the Brahma Purāṇa — with more texts planned over time. Each work is presented with readable typography, chapter navigation, and search so readers can find their way easily.
+          The library currently includes the 108 Upanishads, the complete Bhagavad Gītā, the Vālmīki Rāmāyaṇa with verse-by-verse English translation, the Śiva Purāṇa, the Śrīmad Bhāgavata Purāṇa, and the Brahma Purāṇa — with more texts planned over time. Each work is presented with readable typography, chapter navigation, and search so readers can find their way easily.
         </p>
       </section>
 

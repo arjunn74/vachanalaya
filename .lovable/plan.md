@@ -1,100 +1,110 @@
-# Add Shiva Purana
+# Add Valmiki Ramayana
 
-Bring the Shiva Purana (Siva Purana, English translation, 1,085 pages) into Vachanalaya alongside the 108 Upanishads, reusing the existing reader and design system.
+Ship the full Valmiki Ramayana — 7 kandas, ~600 sargas, ~24,000 shlokas — as a new top-level text alongside Upanishads, Gita, and the three Puranas. Devanagari from the `jayeshmepani/HinduScriptures` repo (already a clean JSON dataset), English translation paired in from a separate source.
 
-## Structure of the source
+## Source pairing
 
-The PDF is organized as:
+- **Sanskrit (Devanagari):** `jayeshmepani/HinduScriptures` → `DharmicData/Ramayanas/ValmikiRamayana/{1..7}.json`. Each entry: `{ kaanda, sarg, shloka, text }`. Already validated against the repo.
+- **English translation:** `valmikiramayan.net` (KMK Murthy / Desiraju Hanumanta Rao verse-by-verse translation). It has a stable per-sarga URL pattern (`/utf8/baala/sarga1/bala_1_frame.htm` etc.) with `<dl>`-style Sanskrit/translation pairs that scrape cleanly into shloka-aligned English.
+  - Fallback if a sarga fails to scrape (encoding issue / missing page): use Ralph T. H. Griffith's public-domain prose translation from sacred-texts.com keyed at the sarga level. English text is still shown, just not aligned per shloka.
+  - Attribution line on every reader page and on the browse page.
 
-```
-Shiva Purana
-├── The Glory of Sivapurana            (7 chapters)
-├── Vidyesvara Samhita                 (25 chapters)
-├── Rudra Samhita
-│   ├── Section I — Creation
-│   ├── Section II — Sati
-│   ├── Section III — Parvati
-│   ├── Section IV — Kumara
-│   └── Section V — Yuddha (Battles)
-├── Satarudra Samhita
-├── Kotirudra Samhita
-├── Uma Samhita
-├── Kailasa Samhita
-└── Vayaviya Samhita (Purvabhaga + Uttarabhaga)
-```
-
-Reader unit = one **chapter**. Browse grouping = **Samhita** (with the Rudra/Vayaviya sub-sections shown as sub-headings inside the Rudra/Vayaviya groups).
+If neither source yields English for a sarga, the reader still renders the Devanagari and shows a small "Translation unavailable for this sarga" note rather than failing.
 
 ## What gets built
 
-### 1. Parsing script (`scripts/parse_shiva_purana.py`)
+### 1. Build script (`scripts/build_ramayana.py`)
 
-One-off Python script using `pypdf`, mirroring `parse_upanishads.py`:
+One-off Python script (mirrors `scripts/build_puranas.py`):
 
-- Read the TOC (pages 2–5) to capture Samhita headings, optional Section headings ("SECTION I CREATION", etc.), and chapter lines `^(\d+)\.\s*(.+?)\.+\s*(\d+)$`.
-- Calibrate the printed-page → PDF-page offset using the first chapter of the Glory section (similar offset-search to the Upanishads parser).
-- For each chapter: concatenate pages from its start to the next chapter's start − 1, strip running headers (Samhita/section names) and bare page numbers, collapse soft line breaks, split into paragraph "verses".
-- Output:
-  - `src/data/shiva-purana.json` — full text
-  - `src/data/shiva-purana-index.json` — lightweight list for browse
-- The PDF itself is **not** shipped (text only).
+1. Fetch the 7 ValmikiRamayana JSONs from the GitHub raw URLs, normalize Devanagari (strip stray control chars, collapse whitespace inside a shloka).
+2. For each `(kaanda, sarg)`, fetch the corresponding valmikiramayan.net page, parse with `BeautifulSoup`, walk shloka-translation pairs, and attach `english` to each shloka by index. Cache raw HTML under `scripts/.cache/ramayana/` so re-runs are cheap.
+3. On parse failure, fetch the Griffith sarga page and attach a single `englishProse` field at the sarga level.
+4. Emit per-sarga JSON files to `public/data/valmiki-ramayana/{kaanda}-{sarg}.json` and a top-level `index.json` with `{ kaandas: [{ id, title, englishTitle, sargas: [{ number, title, shlokaCount }] }], totals }`.
+5. Emit `src/data/valmiki-ramayana.json` (lightweight: kanda + sarga list only) for fast import on the browse page.
 
-### 2. Data layer (`src/data/shiva-purana.ts`)
+The PDF/large raw JSONs are **not** shipped — only the parsed per-sarga JSON in `public/data/`.
+
+### 2. Data layer (`src/lib/ramayana.ts`)
+
+Typed accessors mirroring `src/lib/purana.ts`:
 
 ```ts
-export type Samhita =
-  | "Glory" | "Vidyesvara" | "Rudra" | "Satarudra"
-  | "Kotirudra" | "Uma" | "Kailasa" | "Vayaviya";
+export type Kaanda =
+  | "balakanda" | "ayodhyakanda" | "aranyakanda"
+  | "kishkindhakanda" | "sundarakanda" | "yuddhakanda" | "uttarakanda";
 
-export type ShivaChapter = {
-  id: string;            // "rudra-sati-17-marriage-of-siva-and-sati"
-  number: number;        // chapter # within its section
-  globalNumber: number;  // 1..N across whole text, for prev/next ordering
-  title: string;
-  samhita: Samhita;
-  section?: string;      // e.g. "Section II — Sati" or "Purvabhaga"
-  verses: { text: string }[];
+export type RamayanaShloka = {
+  number: number;
+  sanskrit: string;           // Devanagari
+  english?: string;           // verse-aligned when available
 };
+
+export type RamayanaSarga = {
+  kaanda: Kaanda;
+  number: number;             // sarga within kaanda
+  globalNumber: number;       // 1..N across all 7 kaandas, for prev/next
+  title: string;              // "Bala Kanda — Sarga 1"
+  shlokas: RamayanaShloka[];
+  englishProse?: string;      // Griffith fallback when verse-by-verse missing
+  source: { sanskrit: string; english: string };
+};
+
+export const KAANDA_ORDER: Kaanda[];
+export function getSargaSlug(k: Kaanda, n: number): string;
+export async function loadSarga(slug: string): Promise<RamayanaSarga>;
+export function getNeighbors(slug: string): { prev?: string; next?: string };
 ```
 
-Plus `SAMHITA_ORDER`, `getChapter(slug)`, `getNeighbors(slug)`.
+`loadSarga` does a `fetch('/data/valmiki-ramayana/${slug}.json')` so the 24k-shloka payload stays out of the JS bundle (same pattern as the Puranas).
 
 ### 3. Routes
 
 ```
 src/routes/
-  shiva-purana.tsx           // layout: <Outlet />
-  shiva-purana.index.tsx     // browse: search + filter by Samhita, chapters grouped by Samhita (and Section sub-headings)
-  shiva-purana.$slug.tsx     // reader (reuses the Upanishad reader UI exactly: scroll progress, sticky title, prefs popover, ←/→ prev-next, localStorage resume)
+  valmiki-ramayana.tsx         // layout: <Outlet />
+  valmiki-ramayana.index.tsx   // browse: search + filter by kaanda, sargas grouped by kaanda
+  valmiki-ramayana.$slug.tsx   // reader
 ```
 
-Per-route `head()` SEO with unique title/description.
+Each with its own `head()` (title, description, og:title, og:description).
 
-### 4. Landing & navigation updates
+### 4. Reader
 
-- `src/components/site-header.tsx`: add "Shiva Purana" link next to "Upanishads".
-- `src/routes/index.tsx`: add a second card/section under the Upanishad stats summarising the Shiva Purana (Samhita count, chapter count) and linking into `/shiva-purana`.
-- `/` head() text unchanged — still introduces the library as a whole.
+Reuse `src/components/purana/purana-reader.tsx` as the base, but extend it to render **two stacked lines per shloka**:
 
-### 5. Reader reuse (no duplication)
+- Devanagari (serif, slightly larger)
+- English translation (sans, muted, indented)
 
-The reader on `/upanishads/$slug` and the new `/shiva-purana/$slug` are visually identical. To avoid drift:
+Same scroll progress bar, sticky header, prefs popover (font size, theme), keyboard ←/→ prev/next, `localStorage` resume — all unchanged.
 
-- Extract the existing Upanishad reader body into `src/components/reader/text-reader.tsx` that takes `{ title, eyebrow, verses, prev, next, storageKey }`.
-- Both route files become thin wrappers that load their record and render `<TextReader …/>`.
-- `use-reader-prefs.ts` and `use-app-theme.ts` are unchanged.
+If `englishProse` is present instead of per-shloka English, render Devanagari shloka list followed by a single prose block under a "Translation (Griffith)" sub-heading.
 
-## Out of scope (this milestone)
+### 5. Browse page
 
-- Cross-text full-text search (will add MiniSearch once a third text is in).
-- Sanskrit/Devanagari source, footnotes, glossary linking.
-- User accounts / cross-device progress sync (still `localStorage`).
-- Adding Vedas / Gita / Bhagavatam — separate milestones, but the new generic `<TextReader/>` and `src/data/<text>.{json,ts}` pattern make each one a drop-in.
+Reuse `src/components/purana/purana-browse.tsx` shape:
+
+- Search box (matches sarga title and number across kaandas)
+- Kaanda filter chips (All / Bala / Ayodhya / Aranya / Kishkindha / Sundara / Yuddha / Uttara)
+- Sargas grouped by kaanda, each row shows sarga number, title, shloka count
+
+### 6. Navigation & landing
+
+- `src/components/site-header.tsx`: add **Ramayana** link between Gita and Shiva.
+- `src/routes/index.tsx`: add a "Valmiki Ramayana" card with kaanda + sarga + shloka counts linking to `/valmiki-ramayana`.
+- `src/routes/about.tsx`: append Valmiki Ramayana to the "What's inside" list.
+
+## Out of scope
+
+- Sanskrit transliteration (IAST/Harvard-Kyoto).
+- Word-by-word glossary / commentary.
+- Other Ramayanas in the source repo (Adhyatma, Ananda, Bhushundi, Ramcharitmanas, Yoga Vasistha) — separate milestones.
+- Cross-text full-text search (still per-text).
 
 ## Deliverables
 
-- `scripts/parse_shiva_purana.py` + generated `src/data/shiva-purana.json` and `…-index.json`.
-- `src/data/shiva-purana.ts` typed accessors.
-- `src/routes/shiva-purana.tsx`, `shiva-purana.index.tsx`, `shiva-purana.$slug.tsx`.
-- `src/components/reader/text-reader.tsx`; `/upanishads/$slug` refactored to use it (no visual change).
-- Header + landing page updated to surface the new text.
+- `scripts/build_ramayana.py` + generated `public/data/valmiki-ramayana/*.json` and `src/data/valmiki-ramayana.json`.
+- `src/lib/ramayana.ts` typed accessors.
+- `src/routes/valmiki-ramayana.{tsx,index.tsx,$slug.tsx}`.
+- Reader extended to render Devanagari + English shloka pairs (Purana reader stays backwards-compatible).
+- Header, landing page, About page updated to surface the new text.
