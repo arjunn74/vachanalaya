@@ -5,6 +5,7 @@ import { gitaIndex, GITA_TOTAL_VERSES } from "@/data/gita";
 import { getPuranaIndex, PURANA_META, type PuranaSlug } from "@/lib/purana";
 
 const PURANA_CARDS: PuranaSlug[] = [
+  "valmiki-ramayana",
   "shiva-purana",
   "bhagavata-purana",
   "brahma-purana",

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ValmikiRamayanaRouteImport } from './routes/valmiki-ramayana'
 import { Route as UpanishadsRouteImport } from './routes/upanishads'
 import { Route as ShivaPuranaRouteImport } from './routes/shiva-purana'
 import { Route as GitaRouteImport } from './routes/gita'
@@ -16,17 +17,24 @@ import { Route as BrahmaPuranaRouteImport } from './routes/brahma-purana'
 import { Route as BhagavataPuranaRouteImport } from './routes/bhagavata-purana'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ValmikiRamayanaIndexRouteImport } from './routes/valmiki-ramayana.index'
 import { Route as UpanishadsIndexRouteImport } from './routes/upanishads.index'
 import { Route as ShivaPuranaIndexRouteImport } from './routes/shiva-purana.index'
 import { Route as GitaIndexRouteImport } from './routes/gita.index'
 import { Route as BrahmaPuranaIndexRouteImport } from './routes/brahma-purana.index'
 import { Route as BhagavataPuranaIndexRouteImport } from './routes/bhagavata-purana.index'
+import { Route as ValmikiRamayanaSlugRouteImport } from './routes/valmiki-ramayana.$slug'
 import { Route as UpanishadsSlugRouteImport } from './routes/upanishads.$slug'
 import { Route as ShivaPuranaSlugRouteImport } from './routes/shiva-purana.$slug'
 import { Route as GitaSlugRouteImport } from './routes/gita.$slug'
 import { Route as BrahmaPuranaSlugRouteImport } from './routes/brahma-purana.$slug'
 import { Route as BhagavataPuranaSlugRouteImport } from './routes/bhagavata-purana.$slug'
 
+const ValmikiRamayanaRoute = ValmikiRamayanaRouteImport.update({
+  id: '/valmiki-ramayana',
+  path: '/valmiki-ramayana',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UpanishadsRoute = UpanishadsRouteImport.update({
   id: '/upanishads',
   path: '/upanishads',
@@ -62,6 +70,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ValmikiRamayanaIndexRoute = ValmikiRamayanaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ValmikiRamayanaRoute,
+} as any)
 const UpanishadsIndexRoute = UpanishadsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -86,6 +99,11 @@ const BhagavataPuranaIndexRoute = BhagavataPuranaIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BhagavataPuranaRoute,
+} as any)
+const ValmikiRamayanaSlugRoute = ValmikiRamayanaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ValmikiRamayanaRoute,
 } as any)
 const UpanishadsSlugRoute = UpanishadsSlugRouteImport.update({
   id: '/$slug',
@@ -121,16 +139,19 @@ export interface FileRoutesByFullPath {
   '/gita': typeof GitaRouteWithChildren
   '/shiva-purana': typeof ShivaPuranaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/valmiki-ramayana': typeof ValmikiRamayanaRouteWithChildren
   '/bhagavata-purana/$slug': typeof BhagavataPuranaSlugRoute
   '/brahma-purana/$slug': typeof BrahmaPuranaSlugRoute
   '/gita/$slug': typeof GitaSlugRoute
   '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/valmiki-ramayana/$slug': typeof ValmikiRamayanaSlugRoute
   '/bhagavata-purana/': typeof BhagavataPuranaIndexRoute
   '/brahma-purana/': typeof BrahmaPuranaIndexRoute
   '/gita/': typeof GitaIndexRoute
   '/shiva-purana/': typeof ShivaPuranaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
+  '/valmiki-ramayana/': typeof ValmikiRamayanaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,11 +161,13 @@ export interface FileRoutesByTo {
   '/gita/$slug': typeof GitaSlugRoute
   '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/valmiki-ramayana/$slug': typeof ValmikiRamayanaSlugRoute
   '/bhagavata-purana': typeof BhagavataPuranaIndexRoute
   '/brahma-purana': typeof BrahmaPuranaIndexRoute
   '/gita': typeof GitaIndexRoute
   '/shiva-purana': typeof ShivaPuranaIndexRoute
   '/upanishads': typeof UpanishadsIndexRoute
+  '/valmiki-ramayana': typeof ValmikiRamayanaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -155,16 +178,19 @@ export interface FileRoutesById {
   '/gita': typeof GitaRouteWithChildren
   '/shiva-purana': typeof ShivaPuranaRouteWithChildren
   '/upanishads': typeof UpanishadsRouteWithChildren
+  '/valmiki-ramayana': typeof ValmikiRamayanaRouteWithChildren
   '/bhagavata-purana/$slug': typeof BhagavataPuranaSlugRoute
   '/brahma-purana/$slug': typeof BrahmaPuranaSlugRoute
   '/gita/$slug': typeof GitaSlugRoute
   '/shiva-purana/$slug': typeof ShivaPuranaSlugRoute
   '/upanishads/$slug': typeof UpanishadsSlugRoute
+  '/valmiki-ramayana/$slug': typeof ValmikiRamayanaSlugRoute
   '/bhagavata-purana/': typeof BhagavataPuranaIndexRoute
   '/brahma-purana/': typeof BrahmaPuranaIndexRoute
   '/gita/': typeof GitaIndexRoute
   '/shiva-purana/': typeof ShivaPuranaIndexRoute
   '/upanishads/': typeof UpanishadsIndexRoute
+  '/valmiki-ramayana/': typeof ValmikiRamayanaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -176,16 +202,19 @@ export interface FileRouteTypes {
     | '/gita'
     | '/shiva-purana'
     | '/upanishads'
+    | '/valmiki-ramayana'
     | '/bhagavata-purana/$slug'
     | '/brahma-purana/$slug'
     | '/gita/$slug'
     | '/shiva-purana/$slug'
     | '/upanishads/$slug'
+    | '/valmiki-ramayana/$slug'
     | '/bhagavata-purana/'
     | '/brahma-purana/'
     | '/gita/'
     | '/shiva-purana/'
     | '/upanishads/'
+    | '/valmiki-ramayana/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,11 +224,13 @@ export interface FileRouteTypes {
     | '/gita/$slug'
     | '/shiva-purana/$slug'
     | '/upanishads/$slug'
+    | '/valmiki-ramayana/$slug'
     | '/bhagavata-purana'
     | '/brahma-purana'
     | '/gita'
     | '/shiva-purana'
     | '/upanishads'
+    | '/valmiki-ramayana'
   id:
     | '__root__'
     | '/'
@@ -209,16 +240,19 @@ export interface FileRouteTypes {
     | '/gita'
     | '/shiva-purana'
     | '/upanishads'
+    | '/valmiki-ramayana'
     | '/bhagavata-purana/$slug'
     | '/brahma-purana/$slug'
     | '/gita/$slug'
     | '/shiva-purana/$slug'
     | '/upanishads/$slug'
+    | '/valmiki-ramayana/$slug'
     | '/bhagavata-purana/'
     | '/brahma-purana/'
     | '/gita/'
     | '/shiva-purana/'
     | '/upanishads/'
+    | '/valmiki-ramayana/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -229,10 +263,18 @@ export interface RootRouteChildren {
   GitaRoute: typeof GitaRouteWithChildren
   ShivaPuranaRoute: typeof ShivaPuranaRouteWithChildren
   UpanishadsRoute: typeof UpanishadsRouteWithChildren
+  ValmikiRamayanaRoute: typeof ValmikiRamayanaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/valmiki-ramayana': {
+      id: '/valmiki-ramayana'
+      path: '/valmiki-ramayana'
+      fullPath: '/valmiki-ramayana'
+      preLoaderRoute: typeof ValmikiRamayanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/upanishads': {
       id: '/upanishads'
       path: '/upanishads'
@@ -282,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/valmiki-ramayana/': {
+      id: '/valmiki-ramayana/'
+      path: '/'
+      fullPath: '/valmiki-ramayana/'
+      preLoaderRoute: typeof ValmikiRamayanaIndexRouteImport
+      parentRoute: typeof ValmikiRamayanaRoute
+    }
     '/upanishads/': {
       id: '/upanishads/'
       path: '/'
@@ -316,6 +365,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/bhagavata-purana/'
       preLoaderRoute: typeof BhagavataPuranaIndexRouteImport
       parentRoute: typeof BhagavataPuranaRoute
+    }
+    '/valmiki-ramayana/$slug': {
+      id: '/valmiki-ramayana/$slug'
+      path: '/$slug'
+      fullPath: '/valmiki-ramayana/$slug'
+      preLoaderRoute: typeof ValmikiRamayanaSlugRouteImport
+      parentRoute: typeof ValmikiRamayanaRoute
     }
     '/upanishads/$slug': {
       id: '/upanishads/$slug'
@@ -423,6 +479,20 @@ const UpanishadsRouteWithChildren = UpanishadsRoute._addFileChildren(
   UpanishadsRouteChildren,
 )
 
+interface ValmikiRamayanaRouteChildren {
+  ValmikiRamayanaSlugRoute: typeof ValmikiRamayanaSlugRoute
+  ValmikiRamayanaIndexRoute: typeof ValmikiRamayanaIndexRoute
+}
+
+const ValmikiRamayanaRouteChildren: ValmikiRamayanaRouteChildren = {
+  ValmikiRamayanaSlugRoute: ValmikiRamayanaSlugRoute,
+  ValmikiRamayanaIndexRoute: ValmikiRamayanaIndexRoute,
+}
+
+const ValmikiRamayanaRouteWithChildren = ValmikiRamayanaRoute._addFileChildren(
+  ValmikiRamayanaRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -431,6 +501,7 @@ const rootRouteChildren: RootRouteChildren = {
   GitaRoute: GitaRouteWithChildren,
   ShivaPuranaRoute: ShivaPuranaRouteWithChildren,
   UpanishadsRoute: UpanishadsRouteWithChildren,
+  ValmikiRamayanaRoute: ValmikiRamayanaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
