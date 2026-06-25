@@ -61,7 +61,7 @@ function AboutPage() {
       <section className="mt-10">
         <h2 className="font-serif text-2xl tracking-tight">What's inside</h2>
         <p className="mt-4 text-muted-foreground leading-relaxed">
-          The library currently includes the 108 Upanishads, the complete Bhagavad Gītā, the Śiva Purāṇa, the Śrīmad Bhāgavata Purāṇa, and the Brahma Purāṇa — with more texts planned over time. Each work is presented with readable typography, chapter navigation, and search so readers can find their way easily.
+          The library currently includes the 108 Upanishads, the complete Bhagavad Gītā, the Vālmīki Rāmāyaṇa with verse-by-verse English translation, the Śiva Purāṇa, the Śrīmad Bhāgavata Purāṇa, and the Brahma Purāṇa — with more texts planned over time. Each work is presented with readable typography, chapter navigation, and search so readers can find their way easily.
         </p>
       </section>
 
