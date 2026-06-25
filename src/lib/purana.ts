@@ -1,8 +1,13 @@
 import shivaIndex from "@/data/puranas/shiva-purana.json";
 import bhagavataIndex from "@/data/puranas/bhagavata-purana.json";
 import brahmaIndex from "@/data/puranas/brahma-purana.json";
+import valmikiIndex from "@/data/puranas/valmiki-ramayana.json";
 
-export type PuranaSlug = "shiva-purana" | "bhagavata-purana" | "brahma-purana";
+export type PuranaSlug =
+  | "shiva-purana"
+  | "bhagavata-purana"
+  | "brahma-purana"
+  | "valmiki-ramayana";
 
 export type PuranaChapterMeta = {
   id: string;
@@ -46,6 +51,7 @@ const INDEXES: Record<PuranaSlug, PuranaIndex> = {
   "shiva-purana": shivaIndex as PuranaIndex,
   "bhagavata-purana": bhagavataIndex as PuranaIndex,
   "brahma-purana": brahmaIndex as PuranaIndex,
+  "valmiki-ramayana": valmikiIndex as PuranaIndex,
 };
 
 export const PURANA_META: Record<
@@ -69,6 +75,12 @@ export const PURANA_META: Record<
     tagline: "Adi Purana",
     blurb:
       "The first of the Mahapuranas, narrated by Brahma — cosmology, tirthas of Orissa, and the deeds of the gods.",
+  },
+  "valmiki-ramayana": {
+    name: "Valmiki Ramayana",
+    tagline: "Seven Kandas",
+    blurb:
+      "The Adi Kavya of Maharishi Valmiki — Devanagari with verse-by-verse English translation, from Bala Kanda through Uttara Kanda.",
   },
 };
 
